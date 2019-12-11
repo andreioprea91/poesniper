@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #272727;
+  color: #d8c3a5;
+  font-family: monospace;
+}
+.container {
+  margin-top: 0px;
+  max-width: 900px;
+  margin: auto;
+  border: 3px solid #272727;
+  border-radius: 25px;
+  background-color: #747474;
+}
+
+#logoImg {
+  width: 150px;
+  height: 100px;
+  
+}
+#logoc{
+    text-align: center;
+    border: 1px solid #272727; 
+}
+
+.results{
+    background-color: #747474;
+    border: 1px solid #272727;
+}
+
+#addPost{
+    border: 1px solid #272727;   
+}
+
+#min{
+    width:65px;
+}
+#max{
+    width:65px;
+}
+#but{
+    width: 150px;
+background-color: lawngreen;
+}
