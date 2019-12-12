@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const poeUrl = "http://www.pathofexile.com/api/trade/search/Standard";
 const poeFetchUrl = "https://www.pathofexile.com/api/trade/fetch/";
-const PORT = 5400;
+const PORT = 5500;
 
 const exphbs  = require('express-handlebars');
 app.engine('handlebars', exphbs());
@@ -19,20 +19,19 @@ app.post('/search', (req, res) => {
   
   query.query.name=req.body.name;
   query.query.type=req.body.type;
-  query.query.filters.trade_filters.filters.price.min=req.body.min || 1;
-  query.query.filters.trade_filters.filters.price.max=req.body.max ||999;
-  res.redirect('http://localhost:5400'); 
+  res.redirect('http://localhost:5500'); 
 });
 
-app.get("/", function(req, res) {
- 
-  fetchQuery()
-    .then( data => {
-      
-res.render('home',{data:data.result})
-})
-  .catch(err =>res.send(err)
-)});
+app.get('/',async function(req,res){
+ const response=await fetch("http://localhost:5500/items")
+ const data = await response.json();
+ res.render('home',{data:data.result})
+});
+
+app.get("/items", async function(req, res) {
+ const data= await fetchQuery();
+ res.send(data);
+});
   
 async function fetchQuery() {
 
@@ -42,13 +41,10 @@ async function fetchQuery() {
     body: JSON.stringify(query)
   });
   const data = await response.json();
-  
   const shortArray = data.result.slice(0, 10);
-  
- 
   const urlArray = poeFetchUrl + shortArray + "/?query=" + data.id;
   const secondResponse = await fetch(urlArray);
   const finalData = await secondResponse.json();
   return finalData;
-  }setInterval(fetchQuery, 5000);
+  };
   
