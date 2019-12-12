@@ -1,13 +1,20 @@
-
-
 {{#each data}}
 
-    <div class="results">
-            <h2 id="hitem" >{{item.name}} <em>{{item.typeLine}}</em> </h2>
-            <br>
-            <p>{{listing.whisper}}</p>
-            <br>
-          </div>
-    {{/each}}
-
-    
+<div class="results">
+  <br>
+  <h2 id="hitem">{{item.name}} {{item.typeLine}} </h2>
+  <p>Ilvl:{{item.ilvl}} </p>
+  <p>Price: {{listing.price.amount}} {{listing.price.currency}}</p>
+  <br>
+  {{#each item.explicitMods}}
+  <li id="list">
+    {{index}}{{this}}
+  </li>
+  {{/each }}
+  <br>
+  <p>Contact ingame:</p>
+  <br>
+  <p id="test">{{listing.whisper}}</p>
+  <br>
+</div>
+{{/each}}
