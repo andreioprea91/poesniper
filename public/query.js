@@ -1,30 +1,18 @@
 let query = {
-  "query": {
-    "filters": {
-      "trade_filters": {
-        "disabled": false,
-        "filters": {
-          "price": {
-            "min": 1,
-            "max": 999
-          }
-        }
-      }
+  query: {
+    status: {
+      option: "online"
     },
-    "status": {
-      "option": "online"
-    },
-    "stats": [
+    stats: [
       {
-        "type": "and",
-        "filters": []
+        type: "and",
+        filters: []
       }
-    ],
-    
+    ]
   },
-  "sort": {
-    "indexed": "des"
+  sort: {
+    price: "asc"
   }
-}
+};
 
 export default query;
