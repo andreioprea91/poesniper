@@ -15,24 +15,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
 
-app.post('/search', (req, res) => {
+app.post('/', (req, res) => {
   
   query.query.name=req.body.name;
   query.query.type=req.body.type;
-  res.redirect('http://localhost:5500'); 
+  res.redirect('/'); 
 });
 
 app.get('/',async function(req,res){
- const response=await fetch("http://localhost:5500/items")
- const data = await response.json();
+  const data= await fetchQuery();
  res.render('home',{data:data.result})
 });
 
-app.get("/items", async function(req, res) {
- const data= await fetchQuery();
- res.send(data);
-});
-  
 async function fetchQuery() {
 
   const response = await fetch(poeUrl, {
@@ -47,4 +41,3 @@ async function fetchQuery() {
   const finalData = await secondResponse.json();
   return finalData;
   };
-  
